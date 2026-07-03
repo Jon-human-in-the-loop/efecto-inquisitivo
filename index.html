@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Efecto Inquisitivo — Arquitectura mental</title>
+<meta name="description" content="Arquitectura mental para quienes piensan mucho y avanzan poco. Dejas de acumular respuestas y empiezas a reconocer desde dónde decides.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ TOKENS ============ */
+  :root {
+    --carbon:   #1C1C1C;
+    --carbon-2: #2E2E2E;
+    --cream:    #F5F0E8;
+    --gold:     #C9A84C;
+    --ink:      #2E2E2E;
+    --muted:    #6b6256;
+    --muted-d:  #a9a293;
+    --faint-d:  #5a5447;
+    --serif:    'Playfair Display', Georgia, serif;
+    --body:     'Cormorant Garamond', Georgia, serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--carbon);
+    font-family: var(--body);
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding-left: clamp(22px,6vw,64px); padding-right: clamp(22px,6vw,64px); }
+  .rule { height: 1px; background: var(--gold); opacity: 0.55; }
+
+  .eyebrow {
+    font-family: var(--body);
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 clamp(40px,7vw,72px);
+  }
+
+  section { padding-top: clamp(64px,11vw,128px); padding-bottom: clamp(64px,11vw,128px); }
+
+  a { color: inherit; }
+
+  /* ============ NAV ============ */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px clamp(20px,5vw,64px);
+    background: rgba(245,240,232,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(201,168,76,0.28);
+  }
+  .brand { text-decoration: none; color: var(--carbon); display: flex; align-items: center; gap: 10px; }
+  .brand .dot { width: 9px; height: 9px; background: var(--gold); display: inline-block; }
+  .brand .name { font-family: var(--serif); font-weight: 700; font-size: 1.18rem; letter-spacing: -0.01em; }
+  .nav-cta {
+    text-decoration: none;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--carbon); border: 1px solid var(--carbon);
+    padding: 9px 18px; white-space: nowrap;
+    transition: background .2s, color .2s;
+  }
+  .nav-cta:hover { background: var(--carbon); color: var(--gold); }
+
+  /* ============ HERO ============ */
+  .hero { max-width: 1080px; margin: 0 auto; padding: clamp(70px,13vw,150px) clamp(22px,6vw,64px) clamp(56px,9vw,110px); }
+  .hero .kicker {
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.34em; text-transform: uppercase;
+    color: var(--gold); margin: 0 0 clamp(26px,5vw,44px);
+  }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(2.2rem,10.5vw,6rem); line-height: 1.02; letter-spacing: -0.025em;
+    max-width: 14ch; text-wrap: balance; margin: 0;
+  }
+  .hero .lede {
+    font-size: clamp(1.3rem,3.2vw,1.7rem); font-weight: 400; line-height: 1.5;
+    color: var(--ink); margin: clamp(28px,5vw,40px) 0 0; max-width: 34ch;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(20px,4vw,36px); margin-top: clamp(38px,6vw,56px); }
+
+  .btn-gold {
+    text-decoration: none; background: var(--gold); color: var(--carbon);
+    font-size: 0.92rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 17px 34px; display: inline-flex; align-items: center; gap: 12px;
+    border: none; cursor: pointer; transition: background .2s, color .2s;
+  }
+  .btn-gold:hover { background: var(--carbon); color: var(--gold); }
+
+  .link-underline {
+    text-decoration: none; color: var(--carbon);
+    font-size: 1.08rem; font-weight: 500;
+    border-bottom: 1px solid var(--carbon); padding-bottom: 2px;
+    transition: color .2s, border-color .2s;
+  }
+  .link-underline:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* ============ PROBLEMA ============ */
+  .statement {
+    font-family: var(--serif); font-weight: 500;
+    font-size: clamp(1.45rem,7vw,3.2rem); line-height: 1.16; letter-spacing: -0.015em;
+    text-wrap: balance; margin: 0;
+  }
+  .statement-sep { height: 1px; background: var(--gold); opacity: 0.4; margin: clamp(30px,5vw,48px) 0; }
+
+  /* ============ PARA QUIÉN ============ */
+  .cols { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: clamp(40px,7vw,80px); }
+  .col h3 { font-family: var(--serif); font-weight: 700; font-size: clamp(1.5rem,3.5vw,2rem); letter-spacing: -0.01em; margin: 0 0 28px; }
+  .col.neg { border-left: 1px solid rgba(28,28,28,0.18); padding-left: clamp(28px,5vw,56px); }
+  .col.neg h3 { color: var(--muted); }
+  .checklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px; }
+  .checklist li { display: flex; gap: 14px; font-size: clamp(1.2rem,2.6vw,1.42rem); line-height: 1.45; color: var(--ink); }
+  .checklist li .mk { flex: none; margin-top: 2px; color: var(--gold); }
+  .col.neg .checklist li { color: var(--muted); }
+  .col.neg .checklist li .mk { color: var(--muted); }
+
+  /* ============ ENFOQUE ============ */
+  .approach h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(1.7rem,8vw,4.4rem); line-height: 1.08; letter-spacing: -0.02em; max-width: 13ch; margin: 0; }
+  .approach h2 .hl { color: var(--gold); }
+  .approach p { font-size: clamp(1.25rem,2.8vw,1.55rem); line-height: 1.6; color: var(--ink); margin: clamp(32px,5vw,48px) 0 0; max-width: 48ch; }
+
+  /* ============ SEÑALES ============ */
+  .quote-lead { max-width: 720px; margin: 0; }
+  .quote-lead blockquote {
+    font-family: var(--serif); font-weight: 500; font-style: italic;
+    font-size: clamp(1.5rem,7.5vw,3.6rem); line-height: 1.15; letter-spacing: -0.015em;
+    text-wrap: balance; margin: 0;
+  }
+  figcaption { font-size: 1.05rem; color: var(--muted); margin-top: 28px; letter-spacing: 0.04em; }
+  .quote-grid { display: flex; flex-wrap: wrap; gap: clamp(28px,5vw,56px); margin-top: clamp(48px,8vw,88px); align-items: flex-start; }
+  .quote-grid figure { flex: 1; min-width: 280px; margin: 0; border-top: 1px solid rgba(28,28,28,0.18); padding-top: 24px; }
+  .quote-grid blockquote { font-style: italic; font-size: clamp(1.25rem,2.8vw,1.5rem); line-height: 1.5; color: var(--ink); margin: 0; }
+  .quote-grid figcaption { font-size: 1rem; margin-top: 18px; }
+  .count { font-size: 1.05rem; color: var(--muted); margin-top: clamp(40px,7vw,64px); letter-spacing: 0.06em; }
+  .count b { color: var(--gold); font-weight: 700; font-size: 1.2rem; }
+
+  /* ============ FORMS shared ============ */
+  input, button { font-family: var(--body); }
+  .field {
+    font-size: 1.1rem; padding: 15px 16px;
+    background: #fff; border: 1px solid rgba(28,28,28,0.25); color: var(--carbon);
+    outline: none; transition: border-color .2s; width: 100%;
+  }
+  .field:focus { border-color: var(--gold); }
+  .field.dark { background: var(--carbon); border-color: rgba(245,240,232,0.25); color: var(--cream); }
+  .field.dark:focus { border-color: var(--gold); }
+  .form-note { font-size: 0.98rem; color: var(--muted); margin-top: 12px; letter-spacing: 0.02em; }
+  .form-note.dark { color: var(--muted-d); }
+  .confirm { font-size: 1.25rem; color: var(--carbon); border-left: 2px solid var(--gold); padding-left: 18px; margin: 0; }
+  .confirm.dark { color: var(--cream); }
+  [hidden] { display: none !important; }
+
+  /* ============ CAJA NEGRA ============ */
+  .caja-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: clamp(32px,6vw,64px); align-items: start; }
+  .caja-grid h3 { font-family: var(--serif); font-weight: 700; font-size: clamp(1.7rem,4.5vw,2.6rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0; }
+  .caja-grid .desc { font-size: clamp(1.2rem,2.6vw,1.42rem); line-height: 1.55; color: var(--ink); margin: 20px 0 0; max-width: 38ch; }
+  .caja-form { margin-top: 34px; max-width: 420px; }
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+  .btn-block {
+    font-size: 0.9rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    background: var(--gold); color: var(--carbon); border: none; padding: 16px; cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .btn-block:hover { background: var(--carbon); color: var(--gold); }
+  .aside-card { border: 1px solid rgba(28,28,28,0.18); padding: clamp(28px,4vw,40px); background: rgba(255,255,255,0.4); }
+  .aside-tag { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .aside-tag .dot { width: 8px; height: 8px; background: var(--gold); display: inline-block; }
+  .aside-tag span:last-child { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .aside-card p { font-size: 1.18rem; line-height: 1.5; color: var(--ink); margin: 0; }
+
+  /* ============ FORMACIONES (dark) ============ */
+  .dark-sec { background: var(--carbon); color: var(--cream); }
+  .dark-sec .eyebrow { color: var(--gold); }
+  .formaciones-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: clamp(40px,7vw,80px); align-items: start; }
+  .formaciones-grid h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(1.6rem,7.5vw,3.8rem); line-height: 1.06; letter-spacing: -0.02em; max-width: 14ch; margin: 0; }
+  .formaciones-copy { display: flex; flex-direction: column; gap: 22px; margin-top: clamp(32px,5vw,48px); max-width: 42ch; }
+  .formaciones-copy p { font-size: clamp(1.2rem,2.6vw,1.45rem); line-height: 1.55; color: #d8d2c6; margin: 0; }
+  .reserve-card { border: 1px solid rgba(201,168,76,0.4); padding: clamp(28px,4vw,40px); background: var(--carbon-2); }
+  .reserve-card h3 { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; margin: 0 0 6px; }
+  .reserve-card > p { font-size: 1.05rem; color: var(--muted-d); margin: 0 0 26px; }
+  .btn-block.light:hover { background: var(--cream); color: var(--carbon); }
+
+  /* ============ FAQ ============ */
+  .faq { max-width: 860px; margin: 0 auto; padding: clamp(64px,11vw,128px) clamp(22px,6vw,64px); }
+  .faq-item { border-top: 1px solid rgba(28,28,28,0.18); }
+  .faq-list > .faq-item:last-child { border-bottom: 1px solid rgba(28,28,28,0.18); }
+  .faq-q {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    background: none; border: none; cursor: pointer; text-align: left;
+    padding: clamp(22px,3.5vw,30px) 0; color: var(--carbon);
+  }
+  .faq-q .q { font-family: var(--serif); font-weight: 600; font-size: clamp(1.3rem,3.2vw,1.7rem); line-height: 1.2; letter-spacing: -0.01em; }
+  .faq-q .sign { font-size: 1.8rem; color: var(--gold); flex: none; line-height: 1; }
+  .faq-a { font-size: clamp(1.18rem,2.6vw,1.4rem); line-height: 1.55; color: var(--ink); padding: 0 0 clamp(24px,3.5vw,32px); max-width: 54ch; margin: 0; }
+
+  /* ============ NEWSLETTER ============ */
+  .news { max-width: 1080px; margin: 0 auto; padding: clamp(72px,12vw,140px) clamp(22px,6vw,64px); text-align: center; }
+  .news h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(1.7rem,8vw,4.2rem); line-height: 1.08; letter-spacing: -0.02em; max-width: 16ch; margin: 0 auto; }
+  .news form { max-width: 480px; margin: clamp(36px,6vw,52px) auto 0; }
+  .news-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .news-row .field { flex: 1; min-width: 200px; }
+  .btn-dark {
+    font-size: 0.9rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    background: var(--carbon); color: var(--cream); border: none; padding: 16px 28px; cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .btn-dark:hover { background: var(--gold); color: var(--carbon); }
+  .news .confirm { display: inline-block; font-size: 1.3rem; border: none; padding: 0; }
+
+  /* ============ FOOTER ============ */
+  footer { background: var(--carbon); color: var(--cream); }
+  .footer-inner { max-width: 1080px; margin: 0 auto; padding: clamp(56px,9vw,88px) clamp(22px,6vw,64px) clamp(36px,6vw,56px); }
+  .footer-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 36px; align-items: flex-start; }
+  .footer-brand { display: flex; align-items: center; gap: 11px; }
+  .footer-brand .dot { width: 10px; height: 10px; background: var(--gold); display: inline-block; }
+  .footer-brand .name { font-family: var(--serif); font-weight: 700; font-size: 1.4rem; letter-spacing: -0.01em; }
+  .footer-tag { font-size: 1.1rem; color: var(--muted-d); margin: 16px 0 0; max-width: 30ch; }
+  .footer-links { display: flex; flex-direction: column; gap: 14px; }
+  .footer-links .head { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
+  .footer-links a { text-decoration: none; color: var(--cream); font-size: 1.1rem; border-bottom: 1px solid rgba(201,168,76,0.5); padding-bottom: 2px; width: fit-content; transition: color .2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-links .soon { font-size: 1.05rem; color: var(--faint-d); }
+  .footer-sep { height: 1px; background: rgba(201,168,76,0.3); margin: clamp(40px,6vw,56px) 0 24px; }
+  .footer-legal { font-size: 0.95rem; color: var(--muted); letter-spacing: 0.04em; margin: 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body id="top">
+
+  <!-- ===================== NAV ===================== -->
+  <nav>
+    <a href="#top" class="brand"><span class="dot"></span><span class="name">Efecto Inquisitivo</span></a>
+    <a href="#formaciones" class="nav-cta">Lista de espera</a>
+  </nav>
+
+  <!-- ===================== 1. HERO ===================== -->
+  <header class="hero">
+    <p class="kicker">Arquitectura mental</p>
+    <h1>Sabes demasiado. Avanzas demasiado poco.</h1>
+    <p class="lede">Dejas de acumular respuestas y empiezas a reconocer desde dónde decides. Ahí cambia todo.</p>
+    <div class="hero-actions">
+      <a href="#formaciones" class="btn-gold">Unirme a la lista de espera <span aria-hidden="true">&#8594;</span></a>
+      <a href="#caja-negra" class="link-underline">Descargar El Mapa del Autoengaño (gratis)</a>
+    </div>
+  </header>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- ===================== 2. EL PROBLEMA ===================== -->
+  <section class="wrap">
+    <p class="eyebrow">01 — El problema</p>
+    <div style="max-width:680px">
+      <p class="statement">Llevas años leyendo sobre cambio. Sigues en el mismo lugar.</p>
+      <div class="statement-sep"></div>
+      <p class="statement">No te falta información. Te falta criterio.</p>
+      <div class="statement-sep"></div>
+      <p class="statement">El problema no es la procrastinación. Es que no sabes desde dónde estás decidiendo.</p>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- ===================== 3. PARA QUIÉN ES ===================== -->
+  <section class="wrap">
+    <p class="eyebrow">02 — Para quién es</p>
+    <div class="cols">
+      <div class="col">
+        <h3>Esto es para ti si</h3>
+        <ul class="checklist">
+          <li><span class="mk">—</span><span>Tienes mucho conocimiento acumulado pero poco avance real.</span></li>
+          <li><span class="mk">—</span><span>Eres emprendedor, profesional o líder en proceso de cambio.</span></li>
+          <li><span class="mk">—</span><span>Ya probaste motivación y no fue suficiente.</span></li>
+          <li><span class="mk">—</span><span>Buscas estructura, no inspiración.</span></li>
+        </ul>
+      </div>
+      <div class="col neg">
+        <h3>Esto NO es para ti si</h3>
+        <ul class="checklist">
+          <li><span class="mk">&#215;</span><span>Buscas motivación rápida o frases que animen.</span></li>
+          <li><span class="mk">&#215;</span><span>Quieres resultados sin incomodidad.</span></li>
+          <li><span class="mk">&#215;</span><span>No estás dispuesto a cuestionar cómo piensas.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- ===================== 4. EL ENFOQUE ===================== -->
+  <section class="wrap approach">
+    <p class="eyebrow">03 — El enfoque</p>
+    <h2>No coaching. No motivación. <span class="hl">Arquitectura mental.</span></h2>
+    <p>La diferencia no es de estilo: es de nivel de intervención. La mayoría trabaja sobre el comportamiento aislado —qué haces, cuándo lo haces—. Nosotros trabajamos desde la raíz: la estructura desde la que piensas y decides. Cuando esa estructura cambia, el comportamiento deja de necesitar fuerza de voluntad.</p>
+  </section>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- ===================== 5. SEÑALES ===================== -->
+  <section class="wrap">
+    <p class="eyebrow">04 — Señales</p>
+    <figure class="quote-lead">
+      <blockquote>&#8220;No necesitaba otra técnica. Necesitaba ver desde dónde estaba decidiendo. Eso lo cambió todo.&#8221;</blockquote>
+      <figcaption>Daniel R. — fundador, sesión piloto</figcaption>
+    </figure>
+    <div class="quote-grid">
+      <figure>
+        <blockquote>&#8220;El Mapa del Autoengaño me incomodó en las primeras tres páginas. No lo solté.&#8221;</blockquote>
+        <figcaption>Lucía M. — lectora del recurso</figcaption>
+      </figure>
+      <figure>
+        <blockquote>&#8220;El pensamiento que no examinas se convierte en la vida que no eliges.&#8221;</blockquote>
+        <figcaption>Manifiesto — Efecto Inquisitivo</figcaption>
+      </figure>
+    </div>
+    <p class="count"><b>73</b> personas ya están en la lista de espera.</p>
+  </section>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- ===================== 6. LA CAJA NEGRA ===================== -->
+  <section id="caja-negra" class="wrap">
+    <p class="eyebrow">05 — La Caja Negra</p>
+    <div class="caja-grid">
+      <div>
+        <h3>El Mapa del Autoengaño</h3>
+        <p class="desc">Un PDF que nombra los siete bucles mentales que confundes con avanzar. No te dice qué hacer: te muestra dónde te mientes.</p>
+        <form class="caja-form" data-form="caja">
+          <div class="form-fields stack">
+            <input class="field" type="email" required placeholder="tu@email.com" aria-label="Tu email">
+            <button class="btn-block" type="submit">Acceder a La Caja Negra</button>
+            <p class="form-note">Sin spam. Un recurso, un propósito.</p>
+          </div>
+          <p class="confirm" hidden>Revisa tu correo. El Mapa va en camino.</p>
+        </form>
+      </div>
+      <div class="aside-card">
+        <div class="aside-tag"><span class="dot"></span><span>Más recursos en camino</span></div>
+        <p>La Caja Negra crece. Nuevos mapas, ensayos y herramientas se suman a medida que el sistema se profundiza.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 7. FORMACIONES (dark) ===================== -->
+  <section id="formaciones" class="dark-sec">
+    <div class="wrap">
+      <p class="eyebrow">06 — Formaciones</p>
+      <div class="formaciones-grid">
+        <div>
+          <h2>Grupos de máximo 15. Por una razón.</h2>
+          <div class="formaciones-copy">
+            <p>Sales reconociendo el patrón que repites antes de que vuelva a decidir por ti. No es un curso: es una intervención sobre cómo piensas.</p>
+            <p>El formato reducido no es marketing. Es la única forma en que el trabajo a esta profundidad funciona.</p>
+            <p>La lista de espera tiene prioridad real de acceso. Quien está dentro, entra primero.</p>
+          </div>
+        </div>
+        <div class="reserve-card">
+          <h3>Reserva tu lugar</h3>
+          <p>Acceso prioritario a la próxima formación.</p>
+          <form data-form="formacion">
+            <div class="form-fields stack">
+              <input class="field dark" type="text" required placeholder="Tu nombre" aria-label="Tu nombre">
+              <input class="field dark" type="email" required placeholder="tu@email.com" aria-label="Tu email">
+              <button class="btn-block" type="submit" style="margin-top:4px">Reservar mi lugar en la lista</button>
+              <p class="form-note dark">Menos de 60 segundos. Sin compromiso de compra.</p>
+            </div>
+            <p class="confirm dark" hidden>Estás dentro. Te escribimos antes de que abran los cupos.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 8. FAQ ===================== -->
+  <section class="faq">
+    <p class="eyebrow">07 — Preguntas</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="true">
+          <span class="q">¿Esto es diferente a lo que ya probé?</span><span class="sign" aria-hidden="true">&#8722;</span>
+        </button>
+        <p class="faq-a">Sí, y la diferencia es de nivel. Lo que probaste trabajaba sobre lo que haces. Esto trabaja sobre desde dónde decides hacerlo. No se acumula encima de tus técnicas anteriores: cambia el lugar desde el que las usabas.</p>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="q">¿Necesito tiempo extra en mi semana?</span><span class="sign" aria-hidden="true">+</span>
+        </button>
+        <p class="faq-a" hidden>Sí, algo. No es un consumo pasivo de contenido: requiere que pienses y observes tu propio criterio. No te pediremos horas que no tienes, pero sí atención real. Si buscas algo que se haga solo, este no es el lugar.</p>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="q">¿Qué pasa si no soy constante?</span><span class="sign" aria-hidden="true">+</span>
+        </button>
+        <p class="faq-a" hidden>El sistema no depende de tu disciplina, depende de que veas algo que ya no puedas dejar de ver. Una vez reconoces el patrón desde el que decides, no necesitas forzarte a recordarlo. La constancia deja de ser el problema cuando la estructura cambia.</p>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="q">¿Cuándo empiezan las formaciones?</span><span class="sign" aria-hidden="true">+</span>
+        </button>
+        <p class="faq-a" hidden>Los grupos abren por cohortes de máximo 15 personas. La próxima se anuncia primero a la lista de espera, que tiene prioridad real de acceso. Reservar tu lugar es la forma de enterarte antes de que se llene.</p>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="q">¿Por qué no veo el precio?</span><span class="sign" aria-hidden="true">+</span>
+        </button>
+        <p class="faq-a" hidden>Porque la decisión de entrar no debería tomarse desde el precio, sino desde si esto es para ti. Lo conversamos con quienes están en la lista de espera, sin presión y sin compromiso de compra.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- ===================== 9. NEWSLETTER ===================== -->
+  <section class="news">
+    <h2>Criterio, no contenido. Una vez por semana.</h2>
+    <form data-form="news">
+      <div class="form-fields">
+        <div class="news-row">
+          <input class="field" type="email" required placeholder="tu@email.com" aria-label="Tu email">
+          <button class="btn-dark" type="submit">Suscribirme</button>
+        </div>
+        <p class="form-note">Sin spam. Puedes salir cuando quieras.</p>
+      </div>
+      <p class="confirm" hidden>Listo. Llega cada semana, sin ruido.</p>
+    </form>
+  </section>
+
+  <!-- ===================== 10. FOOTER ===================== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand"><span class="dot"></span><span class="name">Efecto Inquisitivo</span></div>
+          <p class="footer-tag">Arquitectura mental para quienes piensan mucho y avanzan poco.</p>
+        </div>
+        <div class="footer-links">
+          <span class="head">Síguenos</span>
+          <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+          <span class="soon">Podcast — pronto</span>
+          <span class="soon">YouTube — pronto</span>
+          <span class="soon">TikTok — pronto</span>
+        </div>
+      </div>
+      <div class="footer-sep"></div>
+      <p class="footer-legal">© 2026 Efecto Inquisitivo. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+<script>
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.faq-item').forEach(function (item) {
+    var btn = item.querySelector('.faq-q');
+    var answer = item.querySelector('.faq-a');
+    var sign = item.querySelector('.sign');
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      answer.hidden = open;
+      sign.textContent = open ? '+' : '−';
+    });
+  });
+
+  // ---- Forms: mostrar confirmación al enviar ----
+  document.querySelectorAll('form[data-form]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      var fields = form.querySelector('.form-fields');
+      var confirm = form.querySelector('.confirm');
+      if (fields) fields.hidden = true;
+      if (confirm) confirm.hidden = false;
+      // Aquí conectarías tu proveedor de email (Mailchimp, ConvertKit, etc.)
+    });
+  });
+</script>
+
+</body>
+</html>
