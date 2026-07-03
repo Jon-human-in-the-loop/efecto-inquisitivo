@@ -6,6 +6,20 @@
 <title>Efecto Inquisitivo — Arquitectura mental</title>
 <meta name="description" content="Arquitectura mental para quienes piensan mucho y avanzan poco. Dejas de acumular respuestas y empiezas a reconocer desde dónde decides.">
 
+<!-- Favicon (punto dorado sobre carbón, coherente con la marca) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231C1C1C'/%3E%3Crect x='12' y='12' width='8' height='8' fill='%23C9A84C'/%3E%3C/svg%3E">
+
+<!-- Open Graph / redes: preview al compartir en WhatsApp, Instagram, etc. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Efecto Inquisitivo — Arquitectura mental">
+<meta property="og:description" content="Sabes demasiado. Avanzas demasiado poco. Descarga El Mapa del Autoengaño y empieza a reconocer desde dónde decides.">
+<meta property="og:locale" content="es_ES">
+<!-- TODO: sube una imagen 1200x630 (og-image.jpg) al repo y descomenta:
+<meta property="og:image" content="https://TU-DOMINIO/og-image.jpg"> -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Efecto Inquisitivo — Arquitectura mental">
+<meta name="twitter:description" content="Sabes demasiado. Avanzas demasiado poco. Descarga El Mapa del Autoengaño.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
@@ -159,6 +173,7 @@
   .confirm { font-size: 1.25rem; color: var(--carbon); border-left: 2px solid var(--gold); padding-left: 18px; margin: 0; }
   .confirm.dark { color: var(--cream); }
   [hidden] { display: none !important; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
   /* ============ CAJA NEGRA ============ */
   .caja-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: clamp(32px,6vw,64px); align-items: start; }
@@ -337,13 +352,15 @@
       <div>
         <h3>El Mapa del Autoengaño</h3>
         <p class="desc">Un PDF que nombra los siete bucles mentales que confundes con avanzar. No te dice qué hacer: te muestra dónde te mientes.</p>
-        <form class="caja-form" data-form="caja">
+        <form class="caja-form" data-form="caja" data-download>
+          <input type="hidden" name="origen" value="Caja Negra — El Mapa del Autoengaño">
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="form-fields stack">
-            <input class="field" type="email" required placeholder="tu@email.com" aria-label="Tu email">
+            <input class="field" type="email" name="email" required placeholder="tu@email.com" aria-label="Tu email">
             <button class="btn-block" type="submit">Acceder a La Caja Negra</button>
             <p class="form-note">Sin spam. Un recurso, un propósito.</p>
           </div>
-          <p class="confirm" hidden>Revisa tu correo. El Mapa va en camino.</p>
+          <p class="confirm" hidden>Revisa tu correo y descarga el Mapa. Va en camino.</p>
         </form>
       </div>
       <div class="aside-card">
@@ -370,9 +387,11 @@
           <h3>Reserva tu lugar</h3>
           <p>Acceso prioritario a la próxima formación.</p>
           <form data-form="formacion">
+            <input type="hidden" name="origen" value="Lista de espera — Formaciones">
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="form-fields stack">
-              <input class="field dark" type="text" required placeholder="Tu nombre" aria-label="Tu nombre">
-              <input class="field dark" type="email" required placeholder="tu@email.com" aria-label="Tu email">
+              <input class="field dark" type="text" name="nombre" required placeholder="Tu nombre" aria-label="Tu nombre">
+              <input class="field dark" type="email" name="email" required placeholder="tu@email.com" aria-label="Tu email">
               <button class="btn-block" type="submit" style="margin-top:4px">Reservar mi lugar en la lista</button>
               <p class="form-note dark">Menos de 60 segundos. Sin compromiso de compra.</p>
             </div>
@@ -426,9 +445,11 @@
   <section class="news">
     <h2>Criterio, no contenido. Una vez por semana.</h2>
     <form data-form="news">
+      <input type="hidden" name="origen" value="Newsletter semanal">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="form-fields">
         <div class="news-row">
-          <input class="field" type="email" required placeholder="tu@email.com" aria-label="Tu email">
+          <input class="field" type="email" name="email" required placeholder="tu@email.com" aria-label="Tu email">
           <button class="btn-dark" type="submit">Suscribirme</button>
         </div>
         <p class="form-note">Sin spam. Puedes salir cuando quieras.</p>
@@ -459,6 +480,19 @@
   </footer>
 
 <script>
+  /* ============================================================
+     CONFIGURACIÓN — rellena estos dos valores
+     ============================================================
+     1) WEB3FORMS_KEY: crea una cuenta gratis en https://web3forms.com,
+        genera tu "Access Key" y pégala aquí. Los leads te llegarán
+        por email y quedarán guardados en tu panel de Web3Forms.
+     2) PDF_URL: ruta al PDF "El Mapa del Autoengaño". Ahora apunta a
+        un archivo placeholder en el repo; súbelo con ese nombre o
+        cambia la ruta cuando tengas el PDF final.
+  ============================================================ */
+  var WEB3FORMS_KEY = "REEMPLAZA_CON_TU_ACCESS_KEY";
+  var PDF_URL = "/el-mapa-del-autoengano.pdf";
+
   // ---- FAQ accordion ----
   document.querySelectorAll('.faq-item').forEach(function (item) {
     var btn = item.querySelector('.faq-q');
@@ -472,16 +506,61 @@
     });
   });
 
-  // ---- Forms: mostrar confirmación al enviar ----
+  // ---- Descarga del recurso ----
+  function descargarRecurso() {
+    var a = document.createElement('a');
+    a.href = PDF_URL;
+    a.download = 'El-Mapa-del-Autoengano.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  // ---- Envío de leads a Web3Forms ----
   document.querySelectorAll('form[data-form]').forEach(function (form) {
+    var fields  = form.querySelector('.form-fields');
+    var confirm = form.querySelector('.confirm');
+    var btn     = form.querySelector('button[type="submit"]');
+    var esDescarga = form.hasAttribute('data-download');
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
-      var fields = form.querySelector('.form-fields');
-      var confirm = form.querySelector('.confirm');
-      if (fields) fields.hidden = true;
-      if (confirm) confirm.hidden = false;
-      // Aquí conectarías tu proveedor de email (Mailchimp, ConvertKit, etc.)
+
+      var textoBtn = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
+
+      // Modo demo: si aún no has pegado tu Access Key, simula el éxito
+      // para que puedas ver el flujo. Sustitúyela para captar de verdad.
+      if (WEB3FORMS_KEY === "REEMPLAZA_CON_TU_ACCESS_KEY") {
+        console.warn('[Efecto Inquisitivo] Falta WEB3FORMS_KEY: envío simulado, el lead NO se ha guardado.');
+        exito();
+        return;
+      }
+
+      var data = new FormData(form);
+      data.append('access_key', WEB3FORMS_KEY);
+      data.append('subject', 'Nuevo lead — ' + (data.get('origen') || 'Efecto Inquisitivo'));
+      data.append('from_name', 'Efecto Inquisitivo');
+
+      fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+        .then(function (r) { return r.json(); })
+        .then(function (json) {
+          if (json.success) { exito(); }
+          else { fallo(json.message || 'No se pudo enviar.'); }
+        })
+        .catch(function () { fallo('Error de conexión. Inténtalo de nuevo.'); });
+
+      function exito() {
+        if (fields) fields.hidden = true;
+        if (confirm) confirm.hidden = false;
+        if (esDescarga) descargarRecurso();
+        form.reset();
+      }
+      function fallo(msg) {
+        if (btn) { btn.disabled = false; btn.textContent = textoBtn; }
+        alert(msg);
+      }
     });
   });
 </script>
