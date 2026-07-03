@@ -248,8 +248,73 @@
   .footer-sep { height: 1px; background: rgba(201,168,76,0.3); margin: clamp(40px,6vw,56px) 0 24px; }
   .footer-legal { font-size: 0.95rem; color: var(--muted); letter-spacing: 0.04em; margin: 0; }
 
+  /* ============ HERO — captura de email ============ */
+  .hero-form { margin-top: clamp(30px,5vw,44px); max-width: 500px; }
+  .hero-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero-row .field { flex: 1; min-width: 220px; background: #fff; }
+  .hero-form .form-note { margin-top: 14px; }
+  .hero-form .confirm { font-size: 1.2rem; }
+  .hero-alt { margin-top: clamp(24px,4vw,32px); font-size: 1.05rem; color: var(--muted); }
+  .hero-alt a { color: var(--carbon); border-bottom: 1px solid var(--gold); text-decoration: none; padding-bottom: 1px; transition: color .2s; }
+  .hero-alt a:hover { color: var(--gold); }
+
+  /* ============ MOCKUP portada del PDF ============ */
+  .pdf-cover-wrap { display: flex; justify-content: center; align-items: flex-start; }
+  .pdf-cover {
+    width: 100%; max-width: 320px; aspect-ratio: 3 / 4;
+    background: linear-gradient(150deg, #242424 0%, #1C1C1C 55%, #171717 100%);
+    color: var(--cream); position: relative;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: clamp(26px,4vw,36px);
+    box-shadow: 0 2px 0 rgba(201,168,76,0.5), 24px 30px 60px -20px rgba(28,28,28,0.55);
+    transform: rotate(-2deg); transition: transform .35s ease;
+  }
+  .pdf-cover:hover { transform: rotate(0deg) translateY(-4px); }
+  .pdf-cover::before {
+    content: ""; position: absolute; inset: 12px; border: 1px solid rgba(201,168,76,0.35); pointer-events: none;
+  }
+  .pdf-cover::after {
+    content: ""; position: absolute; top: 0; left: 0; bottom: 0; width: 6px;
+    background: rgba(0,0,0,0.35); box-shadow: inset -2px 0 4px rgba(0,0,0,0.4);
+  }
+  .pdf-cover .pc-top { position: relative; }
+  .pdf-cover .pc-kicker { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); margin: 0 0 6px; }
+  .pdf-cover .pc-guide { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted-d); margin: 0; }
+  .pdf-cover .pc-title { font-family: var(--serif); font-weight: 700; font-style: italic; font-size: clamp(1.7rem,3.4vw,2.3rem); line-height: 1.1; letter-spacing: -0.01em; margin: 0; position: relative; }
+  .pdf-cover .pc-rule { width: 46px; height: 2px; background: var(--gold); margin: 18px 0 0; }
+  .pdf-cover .pc-foot { position: relative; display: flex; align-items: center; gap: 9px; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-d); }
+  .pdf-cover .pc-foot .dot { width: 7px; height: 7px; background: var(--gold); display: inline-block; }
+  .caja-note { font-size: 0.98rem; color: var(--muted); margin: 18px 0 0; text-align: center; }
+
+  /* ============ FUNDADOR ============ */
+  .founder-grid { display: grid; grid-template-columns: minmax(180px, 260px) 1fr; gap: clamp(32px,6vw,64px); align-items: center; }
+  .founder-photo {
+    aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+    background: radial-gradient(circle at 50% 38%, #33302a 0%, #26241f 100%);
+    border: 1px solid rgba(201,168,76,0.4);
+    display: flex; align-items: flex-end; justify-content: center; position: relative;
+  }
+  .founder-photo .ph-label { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); text-align: center; font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted-d); }
+  .founder-photo svg { width: 78%; height: auto; opacity: 0.9; }
+  .founder-body h3 { font-family: var(--serif); font-weight: 700; font-size: clamp(1.6rem,4vw,2.4rem); letter-spacing: -0.015em; margin: 0; }
+  .founder-role { font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin: 8px 0 20px; }
+  .founder-body p { font-size: clamp(1.18rem,2.6vw,1.42rem); line-height: 1.6; color: var(--ink); margin: 0 0 16px; max-width: 52ch; }
+  .placeholder-note { display: inline-block; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border: 1px dashed rgba(28,28,28,0.3); padding: 4px 10px; margin-top: 8px; }
+
+  /* ============ AVATARES testimonios ============ */
+  .qt-head { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
+  .avatar { width: 42px; height: 42px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; background: rgba(201,168,76,0.18); border: 1px solid rgba(201,168,76,0.45); font-family: var(--serif); font-weight: 600; font-size: 1rem; color: #8a7327; }
+  .qt-head figcaption { margin-top: 0; }
+
+  @media (max-width: 620px) {
+    .founder-grid { grid-template-columns: 1fr; text-align: center; }
+    .founder-photo { max-width: 200px; margin: 0 auto; }
+    .founder-body p { margin-left: auto; margin-right: auto; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; scroll-behavior: auto !important; }
+    .pdf-cover { transform: none; }
   }
 </style>
 </head>
@@ -266,10 +331,21 @@
     <p class="kicker">Arquitectura mental</p>
     <h1>Sabes demasiado. Avanzas demasiado poco.</h1>
     <p class="lede">Dejas de acumular respuestas y empiezas a reconocer desde dónde decides. Ahí cambia todo.</p>
-    <div class="hero-actions">
-      <a href="#formaciones" class="btn-gold">Unirme a la lista de espera <span aria-hidden="true">&#8594;</span></a>
-      <a href="#caja-negra" class="link-underline">Descargar El Mapa del Autoengaño (gratis)</a>
-    </div>
+
+    <form class="hero-form" data-form="hero" data-download>
+      <input type="hidden" name="origen" value="Hero — El Mapa del Autoengaño">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="form-fields">
+        <div class="hero-row">
+          <input class="field" type="email" name="email" required placeholder="tu@email.com" aria-label="Tu email">
+          <button class="btn-gold" type="submit">Descargar El Mapa <span aria-hidden="true">&#8594;</span></button>
+        </div>
+        <p class="form-note">Guía gratuita en PDF. Sin spam.</p>
+      </div>
+      <p class="confirm" hidden>Descarga en camino. Revisa también tu correo.</p>
+    </form>
+
+    <p class="hero-alt">¿Buscas la formación en grupo? <a href="#formaciones">Únete a la lista de espera →</a></p>
   </header>
 
   <div class="wrap"><div class="rule"></div></div>
@@ -323,31 +399,64 @@
 
   <div class="wrap"><div class="rule"></div></div>
 
-  <!-- ===================== 5. SEÑALES ===================== -->
+  <!-- ===================== 5. QUIÉN ESTÁ DETRÁS ===================== -->
   <section class="wrap">
-    <p class="eyebrow">04 — Señales</p>
+    <p class="eyebrow">04 — Quién está detrás</p>
+    <div class="founder-grid">
+      <div class="founder-photo" role="img" aria-label="Foto del fundador (pendiente)">
+        <span class="ph-label">Tu foto aquí</span>
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="50" cy="38" r="17" fill="#C9A84C" fill-opacity="0.28"/>
+          <path d="M20 90c0-18 13-30 30-30s30 12 30 30" fill="#C9A84C" fill-opacity="0.28"/>
+        </svg>
+      </div>
+      <div class="founder-body">
+        <h3>[Nombre del fundador]</h3>
+        <p class="founder-role">Creador de Efecto Inquisitivo</p>
+        <p>Aquí va tu historia en dos o tres frases: por qué existe Efecto Inquisitivo, desde qué experiencia lo construyes y por qué trabajas la estructura mental y no la motivación. La confianza en una formación tan cercana nace de saber quién está al otro lado.</p>
+        <p>Cierra con una línea de autoridad: tu enfoque, tu formación o el punto de vista que solo tú aportas.</p>
+        <span class="placeholder-note">Texto y foto de ejemplo — reemplazar por los tuyos</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- ===================== 6. SEÑALES ===================== -->
+  <section class="wrap">
+    <p class="eyebrow">05 — Señales</p>
     <figure class="quote-lead">
       <blockquote>&#8220;No necesitaba otra técnica. Necesitaba ver desde dónde estaba decidiendo. Eso lo cambió todo.&#8221;</blockquote>
-      <figcaption>Daniel R. — fundador, sesión piloto</figcaption>
+      <div class="qt-head">
+        <span class="avatar" aria-hidden="true">DR</span>
+        <figcaption>Daniel R. — fundador, sesión piloto</figcaption>
+      </div>
     </figure>
     <div class="quote-grid">
       <figure>
         <blockquote>&#8220;El Mapa del Autoengaño me incomodó en las primeras tres páginas. No lo solté.&#8221;</blockquote>
-        <figcaption>Lucía M. — lectora del recurso</figcaption>
+        <div class="qt-head">
+          <span class="avatar" aria-hidden="true">LM</span>
+          <figcaption>Lucía M. — lectora del recurso</figcaption>
+        </div>
       </figure>
       <figure>
         <blockquote>&#8220;El pensamiento que no examinas se convierte en la vida que no eliges.&#8221;</blockquote>
-        <figcaption>Manifiesto — Efecto Inquisitivo</figcaption>
+        <div class="qt-head">
+          <span class="avatar" aria-hidden="true">EI</span>
+          <figcaption>Manifiesto — Efecto Inquisitivo</figcaption>
+        </div>
       </figure>
     </div>
     <p class="count"><b>73</b> personas ya están en la lista de espera.</p>
+    <p class="placeholder-note">Testimonios de ejemplo — reemplazar por reales</p>
   </section>
 
   <div class="wrap"><div class="rule"></div></div>
 
   <!-- ===================== 6. LA CAJA NEGRA ===================== -->
   <section id="caja-negra" class="wrap">
-    <p class="eyebrow">05 — La Caja Negra</p>
+    <p class="eyebrow">06 — La Caja Negra</p>
     <div class="caja-grid">
       <div>
         <h3>El Mapa del Autoengaño</h3>
@@ -363,9 +472,21 @@
           <p class="confirm" hidden>Revisa tu correo y descarga el Mapa. Va en camino.</p>
         </form>
       </div>
-      <div class="aside-card">
-        <div class="aside-tag"><span class="dot"></span><span>Más recursos en camino</span></div>
-        <p>La Caja Negra crece. Nuevos mapas, ensayos y herramientas se suman a medida que el sistema se profundiza.</p>
+      <div class="pdf-cover-wrap">
+        <div>
+          <div class="pdf-cover" role="img" aria-label="Portada de El Mapa del Autoengaño">
+            <div class="pc-top">
+              <p class="pc-kicker">Efecto Inquisitivo</p>
+              <p class="pc-guide">Guía gratuita · PDF</p>
+            </div>
+            <div>
+              <p class="pc-title">El Mapa del Autoengaño</p>
+              <div class="pc-rule"></div>
+            </div>
+            <div class="pc-foot"><span class="dot"></span><span>7 bucles mentales</span></div>
+          </div>
+          <p class="caja-note">Más recursos se suman a medida que el sistema se profundiza.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -373,7 +494,7 @@
   <!-- ===================== 7. FORMACIONES (dark) ===================== -->
   <section id="formaciones" class="dark-sec">
     <div class="wrap">
-      <p class="eyebrow">06 — Formaciones</p>
+      <p class="eyebrow">07 — Formaciones</p>
       <div class="formaciones-grid">
         <div>
           <h2>Grupos de máximo 15. Por una razón.</h2>
@@ -404,7 +525,7 @@
 
   <!-- ===================== 8. FAQ ===================== -->
   <section class="faq">
-    <p class="eyebrow">07 — Preguntas</p>
+    <p class="eyebrow">08 — Preguntas</p>
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="true">
@@ -564,6 +685,13 @@
     });
   });
 </script>
+
+<!-- Vercel Web Analytics: activa "Analytics" en tu proyecto de Vercel
+     (pestaña Analytics) y este script empezará a registrar visitas. -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 
 </body>
 </html>
